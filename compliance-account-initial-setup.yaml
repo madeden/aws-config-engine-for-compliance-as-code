@@ -643,3 +643,15 @@ Resources:
               Resource:
               - !Join ["", [ "arn:aws:s3:::", !Join [ "-", [ !Ref CodebuildSourceS3BucketConfig, !Ref 'AWS::AccountId', !Ref 'AWS::Region']], "*"]]
               - !Join ["", [ "arn:aws:s3:::", !Join [ "-", [ !Ref CodebuildDestinationS3BucketConfig, !Ref 'AWS::AccountId', !Ref 'AWS::Region']], "*"]]
+
+Outputs:
+  CentralizedS3BucketName:
+    Description: Bucket where Config logs will be stored
+    Export:
+      Name: !Sub ${AWS::StackName}-CentralizedS3BucketName
+    Value: ComplianceCentralizedS3Bucket
+  ComplianceEngineLambda:
+    Description: Lambda that analysis the Config Traces
+    Export:
+      Name: CentralComplianceEngineLambda
+    Value: !Ref LambdaETL
